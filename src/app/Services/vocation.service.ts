@@ -30,4 +30,10 @@ export class VocationService {
 
     return countDayInMonths;
   }
+
+  //Возвращает сумму всех начислений
+  getSummTotal(months: Month[]): number {
+    const summ = months.reduce((acc, value) => acc += value.summ, 0);
+    return summ;
+  }
 }
