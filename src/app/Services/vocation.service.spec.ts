@@ -26,9 +26,15 @@ describe('VocationService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('должен возвращать количество дней в полных месяцах getCountDaysInFullMonth', 
+  it('должен возвращать количество дней в полных месяцах getCountDaysInFullMonth',
     inject([VocationService], (service: VocationService) => {
       const days = service.getCountDaysInFullMonth(months);
       expect(days).toEqual(87.9)
-  }));
+    }));
+
+  it('должен возвращать количество дней в не полных месяцах getCountDaysInFullMonth',
+    inject([VocationService], (service: VocationService) => {
+      const days = service.getCountDaysInNotFullMonth(months);
+      expect(days).toEqual(48.345);
+    }));
 });
