@@ -49,4 +49,24 @@ export class VocationService {
     let result = new Result(avrgSum, vocationSum);
     return result;
   }
+
+  createMonths(dateFrom: Date, dateFromWork: Date = null): Month[]{
+    let months:Month[] = [];
+    let countMonth = 0;
+    const dtEnd = moment(new Date(dateFrom));
+
+    if (dateFrom && dateFromWork) {
+      const dtBegin = moment(new Date(dateFromWork));
+      countMonth = dtEnd.diff(dtBegin, 'months');
+    } else if (dateFrom) {
+      countMonth = 12;
+    }
+
+    for (let i = 0; i < countMonth; i++) {
+      const d = dtEnd.subtract(1, 'months').toDate();
+      const month = new Month(d);
+      months.unshift(month);
+    }
+    return months;
+  }
 }
