@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Month } from '../Models';
+import { Month, Vocation, Result } from '../Models';
 import * as moment from 'moment';
 
 @Injectable({
@@ -35,5 +35,18 @@ export class VocationService {
   getSummTotal(months: Month[]): number {
     const summ = months.reduce((acc, value) => acc += value.summ, 0);
     return summ;
+  }
+
+  getResult(vocation: Vocation): Result {
+    const ob = vocation.month[vocation.month.length - 1];
+    if(vocation.dateFromWork && vocation.dateFromWork.getDate() > 1){
+      ob.excludeCountDay = vocation.dateFromWork.getDate();
+    }
+    const znam = this.getCountDaysInFullMonth(vocation.month) + this.getCountDaysInNotFullMonth(vocation.month);
+    const avrgSum = this.getSummTotal(vocation.month) / znam;
+
+    const vocationSum = Math.round((avrgSum * vocation.countDay) * 100) / 100;
+    let result = new Result(avrgSum, vocationSum);
+    return result;
   }
 }
