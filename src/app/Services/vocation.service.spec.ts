@@ -37,4 +37,9 @@ describe('VocationService', () => {
       const days = service.getCountDaysInNotFullMonth(months);
       expect(days).toEqual(48.345);
     }));
+
+  it('должен вернуть сумму всех начислений getSummTotal', inject([VocationService], (service: VocationService) => {
+    const summ = service.getSummTotal(months);
+    expect(summ).toEqual(573);
+  }));
 });
