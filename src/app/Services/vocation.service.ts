@@ -39,7 +39,7 @@ export class VocationService {
     return summ;
   }
 
-  getResult(vocation: Vocation): Result {
+  getResult(vocation: Vocation): Observable<Result> {
     const ob = vocation.month[vocation.month.length - 1];
     if (vocation.dateFromWork && vocation.dateFromWork.getDate() > 1) {
       ob.excludeCountDay = vocation.dateFromWork.getDate();
@@ -48,8 +48,15 @@ export class VocationService {
     const avrgSum = this.getSummTotal(vocation.month) / znam;
 
     const vocationSum = Math.round((avrgSum * vocation.countDay) * 100) / 100;
-    let result = new Result(avrgSum, vocationSum);
-    return result;
+
+    return Observable.create(observer => {
+      if(isNaN(vocationSum)){
+       observer.error('Ошибка во время вычисления');
+      }
+      let result = new Result(avrgSum, vocationSum);
+      observer.next(result);
+      observer.complete();
+    });
   }
 
   getMonths(vocation: Vocation): Observable<Month[]> {

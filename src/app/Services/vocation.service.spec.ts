@@ -19,6 +19,9 @@ describe('VocationService', () => {
       new Month(new Date(2019, 4), 100, 0),
       new Month(new Date(2019, 5), 173, 3)
     ];
+
+    vocation = new Vocation(new Date(2019,7, 1),months,28);
+
   });
 
   it('should be created', () => {
@@ -64,6 +67,26 @@ describe('VocationService', () => {
     expect(listMonth.length).toEqual(5);
     const dateEnd = listMonth[0].month;
     expect(dateEnd.getMonth()).toEqual(1);
+  }));
+
+  it('должен вернуть сумму отпускных', inject([VocationService], (service: VocationService) => {
+    let summ = 0; 
+    service.getResult(vocation).subscribe(
+      value => summ = value.vocatioSumm
+    )  
+    expect(summ).toEqual(117.76);
+  }));
+
+  it('должно быть вызвано исключение getResult', inject([VocationService], (service: VocationService) => {
+    let summ = 0;
+    let error; 
+    vocation = new Vocation(null,null,null);
+    service.getResult(vocation).subscribe(
+      value => summ = value.vocatioSumm,
+      err => error = 'Testing error'
+    )  
+    console.log(error);
+    expect(error).toEqual('Testing error');
   }));
 
 });
