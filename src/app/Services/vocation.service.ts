@@ -52,14 +52,12 @@ export class VocationService {
 
   createMonths(dateFrom: Date, dateFromWork: Date = null): Month[]{
     let months:Month[] = [];
-    let countMonth = 0;
+    let countMonth = 12;
     const dtEnd = moment(new Date(dateFrom));
 
     if (dateFrom && dateFromWork) {
       const dtBegin = moment(new Date(dateFromWork));
       countMonth = dtEnd.diff(dtBegin, 'months');
-    } else if (dateFrom) {
-      countMonth = 12;
     }
 
     for (let i = 0; i < countMonth; i++) {

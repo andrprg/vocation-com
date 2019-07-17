@@ -42,4 +42,30 @@ describe('VocationService', () => {
     const summ = service.getSummTotal(months);
     expect(summ).toEqual(573);
   }));
+
+  it('должен вернуть список месяцев (отработал полный год)', inject([VocationService], (service: VocationService) => {
+    const dateFrom = new Date(2019,6,16);
+    const listMonth:Month[] = service.createMonths(dateFrom);
+    expect(listMonth.length).toEqual(12);
+    const dateEnd = listMonth[listMonth.length - 1].month;
+    console.log(dateEnd);
+    expect(dateEnd.getMonth()).toEqual(5);
+  }));
+
+  it('должен вернуть список месяцев (отработал полный год)', inject([VocationService], (service: VocationService) => {
+    const dateFrom = new Date(2019,6,16);
+    const listMonth:Month[] = service.createMonths(dateFrom);
+    expect(listMonth.length).toEqual(12);
+    const dateEnd = listMonth[listMonth.length - 1].month;
+    expect(dateEnd.getMonth()).toEqual(5);
+  }));
+
+  it('должен вернуть список месяцев (отработал не полный год)', inject([VocationService], (service: VocationService) => {
+    const dateFrom = new Date(2019,6,16);
+    const dateFromWork = new Date(2019,1,16);
+    const listMonth:Month[] = service.createMonths(dateFrom,dateFromWork);
+    expect(listMonth.length).toEqual(5);
+    const dateEnd = listMonth[0].month;
+    expect(dateEnd.getMonth()).toEqual(1);
+  }));
 });
