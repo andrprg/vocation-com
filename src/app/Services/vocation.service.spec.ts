@@ -48,15 +48,6 @@ describe('VocationService', () => {
     const listMonth:Month[] = service.getMonths(new Vocation(dateFrom));
     expect(listMonth.length).toEqual(12);
     const dateEnd = listMonth[listMonth.length - 1].month;
-    console.log(dateEnd);
-    expect(dateEnd.getMonth()).toEqual(5);
-  }));
-
-  it('должен вернуть список месяцев (отработал полный год)', inject([VocationService], (service: VocationService) => {
-    const dateFrom = new Date(2019,6,16);
-    const listMonth:Month[] = service.getMonths(new Vocation(dateFrom));
-    expect(listMonth.length).toEqual(12);
-    const dateEnd = listMonth[listMonth.length - 1].month;
     expect(dateEnd.getMonth()).toEqual(5);
   }));
 
