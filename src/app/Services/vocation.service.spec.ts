@@ -87,4 +87,14 @@ describe('VocationService', () => {
     expect(error).toEqual('Testing error');
   }));
 
+
+  it('должно быть вызвано исключение getMonths', inject([VocationService], (service: VocationService) => {
+    let error;
+    service.getMonths(new Vocation(null)).subscribe(
+      () => null,
+      err => error = 'Testing error'
+      );
+      expect(error).toEqual('Testing error');
+  }));
+
 });

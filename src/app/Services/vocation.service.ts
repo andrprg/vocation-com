@@ -62,6 +62,12 @@ export class VocationService {
   getMonths(vocation: Vocation): Observable<Month[]> {
     const dateFrom = vocation.dateFrom;
     const dateFromWork = vocation.dateFromWork;
+    if(!dateFrom){
+      return Observable.create(observer => {
+        observer.error('Ошибка во время получения списка месяцев');
+      });
+    }
+
     let months: Month[] = [];
     let countMonth = 12;
     const dtEnd = moment(new Date(dateFrom));
