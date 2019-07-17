@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Month, Vocation, Result } from '../Models';
 import * as moment from 'moment';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +41,7 @@ export class VocationService {
 
   getResult(vocation: Vocation): Result {
     const ob = vocation.month[vocation.month.length - 1];
-    if(vocation.dateFromWork && vocation.dateFromWork.getDate() > 1){
+    if (vocation.dateFromWork && vocation.dateFromWork.getDate() > 1) {
       ob.excludeCountDay = vocation.dateFromWork.getDate();
     }
     const znam = this.getCountDaysInFullMonth(vocation.month) + this.getCountDaysInNotFullMonth(vocation.month);
@@ -50,10 +52,10 @@ export class VocationService {
     return result;
   }
 
-  getMonths(vocation: Vocation): Month[]{
+  getMonths(vocation: Vocation): Observable<Month[]> {
     const dateFrom = vocation.dateFrom;
     const dateFromWork = vocation.dateFromWork;
-    let months:Month[] = [];
+    let months: Month[] = [];
     let countMonth = 12;
     const dtEnd = moment(new Date(dateFrom));
 
@@ -67,6 +69,9 @@ export class VocationService {
       const month = new Month(d);
       months.unshift(month);
     }
-    return months;
+    return Observable.create(observer => {
+      observer.next(months);
+      observer.complete();
+    });
   }
 }
