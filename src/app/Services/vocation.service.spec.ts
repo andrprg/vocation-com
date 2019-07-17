@@ -78,14 +78,12 @@ describe('VocationService', () => {
   }));
 
   it('должно быть вызвано исключение getResult', inject([VocationService], (service: VocationService) => {
-    let summ = 0;
     let error; 
     vocation = new Vocation(null,null,null);
     service.getResult(vocation).subscribe(
-      value => summ = value.vocatioSumm,
+      () => null,
       err => error = 'Testing error'
     )  
-    console.log(error);
     expect(error).toEqual('Testing error');
   }));
 
