@@ -50,7 +50,9 @@ export class VocationService {
     return result;
   }
 
-  createMonths(dateFrom: Date, dateFromWork: Date = null): Month[]{
+  getMonths(vocation: Vocation): Month[]{
+    const dateFrom = vocation.dateFrom;
+    const dateFromWork = vocation.dateFromWork;
     let months:Month[] = [];
     let countMonth = 12;
     const dtEnd = moment(new Date(dateFrom));
