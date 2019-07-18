@@ -20,7 +20,7 @@ describe('VocationService', () => {
       new Month(new Date(2019, 5), 173, 3)
     ];
 
-    vocation = new Vocation(new Date(2019,7, 1),months,28);
+    vocation = new Vocation(new Date(2019,7, 1),28);
 
   });
 
@@ -61,7 +61,7 @@ describe('VocationService', () => {
     const dateFrom = new Date(2019,6,16);
     const dateFromWork = new Date(2019,1,16);
     let listMonth:Month[] = [];
-    service.getMonths(new Vocation(dateFrom,null,null, dateFromWork)).subscribe(val => listMonth = val);
+    service.getMonths(new Vocation(dateFrom,null, dateFromWork)).subscribe(val => listMonth = val);
     expect(listMonth.length).toEqual(5);
 
     expect(listMonth.length).toEqual(5);
@@ -71,7 +71,7 @@ describe('VocationService', () => {
 
   it('должен вернуть сумму отпускных', inject([VocationService], (service: VocationService) => {
     let summ = 0; 
-    service.getResult(vocation).subscribe(
+    service.getResult(vocation, months).subscribe(
       value => summ = value.vocatioSumm
     )  
     expect(summ).toEqual(117.76);
@@ -80,7 +80,7 @@ describe('VocationService', () => {
   it('должно быть вызвано исключение getResult', inject([VocationService], (service: VocationService) => {
     let error; 
     vocation = new Vocation(null,null,null);
-    service.getResult(vocation).subscribe(
+    service.getResult(null, null).subscribe(
       () => null,
       err => error = 'Testing error'
     )  

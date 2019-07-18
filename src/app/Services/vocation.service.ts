@@ -39,13 +39,18 @@ export class VocationService {
     return summ;
   }
 
-  getResult(vocation: Vocation): Observable<Result> {
-    const ob = vocation.month[vocation.month.length - 1];
+  getResult(vocation: Vocation, month:Month[]): Observable<Result> {
+    if(!vocation || !month){
+      return Observable.create(observer => {
+        observer.error('Ошибка во время вычисления');
+      });
+    }
+    const ob = month[month.length - 1];
     if (vocation.dateFromWork && vocation.dateFromWork.getDate() > 1) {
       ob.excludeCountDay = vocation.dateFromWork.getDate();
     }
-    const znam = this.getCountDaysInFullMonth(vocation.month) + this.getCountDaysInNotFullMonth(vocation.month);
-    const avrgSum = this.getSummTotal(vocation.month) / znam;
+    const znam = this.getCountDaysInFullMonth(month) + this.getCountDaysInNotFullMonth(month);
+    const avrgSum = this.getSummTotal(month) / znam;
 
     const vocationSum = Math.round((avrgSum * vocation.countDay) * 100) / 100;
 
