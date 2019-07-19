@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Month, Vocation, Result } from '../Models';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
-import { range } from 'rxjs';
-//import { reduce } from 'rxjs/operators';
 
 
 @Injectable({
