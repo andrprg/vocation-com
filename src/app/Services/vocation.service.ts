@@ -41,26 +41,22 @@ export class VocationService {
     return summ;
   }
 
-  getResult(vocation: Vocation, month:Month[]): Observable<Result> {
-    if(!vocation || !month){
-      return Observable.create(observer => {
-        observer.error('Ошибка во время вычисления');
-      });
-    }
-    const ob = month[month.length - 1];
-    if (vocation.dateFromWork && vocation.dateFromWork.getDate() > 1) {
-      ob.excludeCountDay = vocation.dateFromWork.getDate();
-    }
-    const znam = this.getCountDaysInFullMonth(month) + this.getCountDaysInNotFullMonth(month);
-    const avrgSum = this.getSummTotal(month) / znam;
-
-    const vocationSum = Math.round((avrgSum * vocation.countDay) * 100) / 100;
+  getResult(vocation: Vocation, month: Month[]): Observable<Result> {
 
     return Observable.create(observer => {
-      if(isNaN(vocationSum)){
-       observer.error('Ошибка во время вычисления');
+      if (!vocation || !month) observer.error('Ошибка во время вычисления');
+      const { dateFromWork } = vocation;
+      const ob = month[month.length - 1];
+      if (dateFromWork && dateFromWork.getDate() > 1) {
+        ob.excludeCountDay = dateFromWork.getDate();
       }
-      let result = new Result(avrgSum, vocationSum);
+      const znam = this.getCountDaysInFullMonth(month) + this.getCountDaysInNotFullMonth(month);
+      const avrgSum = this.getSummTotal(month) / znam;
+      const vocationSum = Math.round((avrgSum * vocation.countDay) * 100) / 100;
+
+      if (isNaN(vocationSum)) observer.error('Ошибка во время вычисления');
+
+      const result = new Result(Math.round(avrgSum * 100) / 100, vocationSum);
       observer.next(result);
       observer.complete();
     });
@@ -68,19 +64,19 @@ export class VocationService {
 
   getMonths(vocation: Vocation): Observable<Month[]> {
     return Observable.create(observer => {
-      const {dateFrom, dateFromWork} = vocation;
-      if(!dateFrom) observer.error('Ошибка во время получения списка месяцев');       
+      const { dateFrom, dateFromWork } = vocation;
+      if (!dateFrom) observer.error('Ошибка во время получения списка месяцев');
       const dtEnd = moment(dateFrom);
       const countMonth = (dateFrom && dateFromWork)
-                  ?dtEnd.diff(moment(dateFromWork), 'months')
-                  :12;
+        ? dtEnd.diff(moment(dateFromWork), 'months')
+        : 12;
       let months: Month[] = [];
 
       for (let i = 0; i < countMonth; i++) {
         const d = dtEnd.subtract(1, 'months').toDate();
         const month = new Month(d);
         months.unshift(month);
-      }      
+      }
       observer.next(months);
       observer.complete();
     });
