@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Month, Vocation, Result } from '../Models';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
+import { range } from 'rxjs';
+//import { reduce } from 'rxjs/operators';
 
 
 @Injectable({
@@ -65,29 +67,20 @@ export class VocationService {
   }
 
   getMonths(vocation: Vocation): Observable<Month[]> {
-    const dateFrom = vocation.dateFrom;
-    const dateFromWork = vocation.dateFromWork;
-    if(!dateFrom){
-      return Observable.create(observer => {
-        observer.error('Ошибка во время получения списка месяцев');
-      });
-    }
-
-    let months: Month[] = [];
-    let countMonth = 12;
-    const dtEnd = moment(new Date(dateFrom));
-
-    if (dateFrom && dateFromWork) {
-      const dtBegin = moment(new Date(dateFromWork));
-      countMonth = dtEnd.diff(dtBegin, 'months');
-    }
-
-    for (let i = 0; i < countMonth; i++) {
-      const d = dtEnd.subtract(1, 'months').toDate();
-      const month = new Month(d);
-      months.unshift(month);
-    }
     return Observable.create(observer => {
+      const {dateFrom, dateFromWork} = vocation;
+      if(!dateFrom) observer.error('Ошибка во время получения списка месяцев');       
+      const dtEnd = moment(dateFrom);
+      const countMonth = (dateFrom && dateFromWork)
+                  ?dtEnd.diff(moment(dateFromWork), 'months')
+                  :12;
+      let months: Month[] = [];
+
+      for (let i = 0; i < countMonth; i++) {
+        const d = dtEnd.subtract(1, 'months').toDate();
+        const month = new Month(d);
+        months.unshift(month);
+      }      
       observer.next(months);
       observer.complete();
     });
