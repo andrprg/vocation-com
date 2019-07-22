@@ -9,14 +9,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './Store';
 import { MonthEffect } from './Store/effects/month.effects';
 import { VocationContainerComponent } from './Components/vocation-container/vocation-container.component';
-import { VocationComponent } from './Components/vocation/vocation.component';
 import { VocationFormComponent } from './Components/vocation-form/vocation-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VocationContainerComponent,
-    VocationComponent,
+    VocationFormComponent,
     VocationFormComponent
   ],
   imports: [
