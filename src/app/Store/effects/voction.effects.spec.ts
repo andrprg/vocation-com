@@ -1,7 +1,7 @@
 import { TestBed } from "@angular/core/testing";
 import { provideMockActions } from '@ngrx/effects/testing';
 import { cold, hot } from 'jasmine-marbles';
-import { VocationEffect } from './vocation.effects';
+import { MonthEffect } from './month.effects';
 import * as Actions from '../actions/month.action';
 import { Observable } from 'rxjs';
 import { VocationService } from 'src/app/Services/vocation.service';
@@ -9,7 +9,7 @@ import { VocationService } from 'src/app/Services/vocation.service';
 import { Vocation, Month } from 'src/app/Models';
 
 describe('Testing Effects', () => {
-    let monthEffect:VocationEffect;
+    let monthEffect:MonthEffect;
     let actions$: Observable<any>;
     let monthService;
     let months = [
@@ -26,7 +26,7 @@ describe('Testing Effects', () => {
         imports: [
         ],
         providers: [
-          VocationEffect,
+          MonthEffect,
           /*
           provideMockActions(() => actions$),
           {

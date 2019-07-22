@@ -8,7 +8,7 @@ import * as fromActions from '../actions/month.action';
 import { Vocation } from 'src/app/Models';
 
 @Injectable()
-export class VocationEffect{
+export class MonthEffect{
     constructor(
         private vocationService: VocationService,
         private actions$: Actions
