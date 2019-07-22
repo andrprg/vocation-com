@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/Store';
+import { Month, Result } from 'src/app/Models';
+
 
 @Component({
   selector: 'app-vocation-container',
@@ -7,9 +12,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VocationContainerComponent implements OnInit {
 
-  constructor() { }
+  month$:  Observable<Month[]>;
+  result$: Observable<Result>;
+
+  constructor(
+    private store: Store<AppState>
+  ) { }
 
   ngOnInit() {
+  }
+
+  onSubmitVocation(event){
+    //
   }
 
 }

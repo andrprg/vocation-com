@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VocationComponent } from './vocation.component';
+import { VocationFormComponent } from './vocation-form.component';
 
 describe('VocationComponent', () => {
-  let component: VocationComponent;
-  let fixture: ComponentFixture<VocationComponent>;
+  let component: VocationFormComponent;
+  let fixture: ComponentFixture<VocationFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VocationComponent ]
+      declarations: [ VocationFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VocationComponent);
+    fixture = TestBed.createComponent(VocationFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
