@@ -1,13 +1,18 @@
 <form [formGroup]="formGroup">
   <div class="row">
     <div class="col-md-12">
-      <input type="checkbox" id="defaultUnchecked" [checked]="isFromWork" (change)="toggleDateFromWorkValidator()">
-      <label for="defaultUnchecked">Работник отработал меньше года</label>
+      <input type="checkbox" id="workChecked" [checked]="isFromWork" (change)="toggleDateFromWorkValidator()">
+      <label for="workChecked">Работник отработал меньше года</label>
     </div>
 
     <div class="col-md-6 mt-2">
       <label class="control-label" for="dateFromWork">Дата приема на работу</label>
       <input type="date" id="dateFromWork" class="form-control" [readonly]="!isFromWork" formControlName="dateFromWork">
+      <div class="error" *ngIf="formGroup.get('dateFromWork') && 
+                                formGroup.get('dateFromWork').invalid && 
+                                formGroup.get('dateFromWork').touched">
+        Введено неверное значение
+      </div>      
     </div>
   </div>
 
