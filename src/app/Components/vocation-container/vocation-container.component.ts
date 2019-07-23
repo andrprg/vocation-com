@@ -23,7 +23,7 @@ export class VocationContainerComponent implements OnInit {
   }
 
   onSubmitVocation(event){
-    //
+    console.log(event);
   }
 
 }

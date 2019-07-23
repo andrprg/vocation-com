@@ -14,6 +14,7 @@ export class VocationFormComponent implements OnInit, OnDestroy{
   formGroup: FormGroup;
   private sub: Subscription;
   isFromWork:boolean = false;
+  @Output() onVocation = new EventEmitter<Vocation>();
 
   constructor(private fb: FormBuilder) { }
 
@@ -49,5 +50,14 @@ export class VocationFormComponent implements OnInit, OnDestroy{
     }
     dateWork.updateValueAndValidity();     
   }
+
+  submit() {
+    const data = new Vocation(
+      new Date(this.formGroup.get('dateFrom').value),
+      this.formGroup.get('countDay').value,
+      this.isFromWork ? new Date(this.formGroup.get('dateFromWork').value) : null
+    )
+    this.onVocation.emit(data);    
+  }  
 
 }
