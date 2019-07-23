@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter  } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy   } from '@angular/core';
 import { Vocation } from 'src/app/Models';
 import { FormGroup, FormBuilder, FormControl, Validators, ValidatorFn } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -6,7 +6,8 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-vocation',
   templateUrl: './vocation-form.component.html',
-  styleUrls: ['./vocation-form.component.css']
+  styleUrls: ['./vocation-form.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VocationFormComponent implements OnInit, OnDestroy{
 
@@ -46,6 +47,7 @@ export class VocationFormComponent implements OnInit, OnDestroy{
       dateWork.setValidators(dateFromWorkValidators);
     } else {
       dateWork.clearValidators();
+      dateWork.reset();
     }
     dateWork.updateValueAndValidity();     
   }
