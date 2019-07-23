@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Month } from 'src/app/Models';
 
 @Component({
   selector: 'app-months-form',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./months-form.component.css']
 })
 export class MonthsFormComponent implements OnInit {
+
+  @Input() months:Month[];
 
   constructor() { }
 
