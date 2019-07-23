@@ -10,12 +10,14 @@ import { reducers } from './Store';
 import { MonthEffect } from './Store/effects/month.effects';
 import { VocationContainerComponent } from './Components/vocation-container/vocation-container.component';
 import { VocationFormComponent } from './Components/vocation-form/vocation-form.component';
+import { MonthsFormComponent } from './Components/months-form/months-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VocationContainerComponent,
-    VocationFormComponent
+    VocationFormComponent,
+    MonthsFormComponent
   ],
   imports: [
     BrowserModule,
