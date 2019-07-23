@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs';
 })
 export class VocationFormComponent implements OnInit, OnDestroy{
 
-  @Output() onSubmit = new EventEmitter<Vocation>();
   formGroup: FormGroup;
   private sub: Subscription;
   isFromWork:boolean = false;
@@ -51,11 +50,11 @@ export class VocationFormComponent implements OnInit, OnDestroy{
     dateWork.updateValueAndValidity();     
   }
 
-  submit() {
+  onSubmit({dateFrom,dateFromWork,countDay}) {
     const data = new Vocation(
-      new Date(this.formGroup.get('dateFrom').value),
-      this.formGroup.get('countDay').value,
-      this.isFromWork ? new Date(this.formGroup.get('dateFromWork').value) : null
+      new Date(dateFrom),
+      countDay,
+      this.isFromWork ? new Date(dateFromWork) : null
     )
     this.onVocation.emit(data);    
   }  
