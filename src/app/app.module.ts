@@ -15,7 +15,6 @@ import { VocationFormComponent } from './Components/vocation-form/vocation-form.
   declarations: [
     AppComponent,
     VocationContainerComponent,
-    VocationFormComponent,
     VocationFormComponent
   ],
   imports: [
