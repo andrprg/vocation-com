@@ -22,9 +22,23 @@ export const getMonths = createSelector(
     (state:MonthState) => state.month
 );
 
+export const selectMonthLoadFailure = createSelector(
+    getMonthState,
+    (state: MonthState) => {
+        return state.error;
+    }
+);
+
 
 export const getResultState = createFeatureSelector<ResultState>('resultState');
 export const getResult = createSelector(
     getResultState,
     (state:ResultState) => state.result
+);
+
+export const selectResultLoadFailure = createSelector(
+    getResultState,
+    (state: ResultState) => {
+        return state.error;
+    }
 );
