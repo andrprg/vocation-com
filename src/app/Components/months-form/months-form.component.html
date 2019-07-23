@@ -1,3 +1,24 @@
-<p>
-  months-form works!
-</p>
+<form (ngSubmit)="onSubmit(formGroup.value)" [formGroup]="formGroup">
+  <div class="row mt-2 border-top" formArrayName="months">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Месяц</th>
+          <th>Зарплата</th>
+          <th>Количество исключаемых дней</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of formGroup.get('months').controls; index as i" [formGroupName]="i">
+          <td><label class="control-label mt-2">{{getMonthToName(item.controls['month'].value)}}</label></td>
+          <td>
+            <input type="number" class="form-control" formControlName="summ">
+          </td>
+          <td>
+            <input type="number" class="form-control" formControlName="excludeCountDay">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>
