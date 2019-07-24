@@ -9,7 +9,7 @@
             <app-months-form [months]="month" (onMonth)="onSubmitMonth($event)"></app-months-form>
         </ng-template>
         <ng-template [ngSwitchCase]="'result'">
-            <app-months-form [months]="result" (onResult)="onSubmitResult($event)"></app-months-form>
+            <app-result-form [result]="result" (onReset)="onSubmitResult($event)"></app-result-form>
         </ng-template>
         
       </div>
