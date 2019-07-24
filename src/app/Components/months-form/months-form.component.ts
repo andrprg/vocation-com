@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Month } from 'src/app/Models';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import * as moment from 'moment';
@@ -6,11 +6,13 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-months-form',
   templateUrl: './months-form.component.html',
-  styleUrls: ['./months-form.component.css']
+  styleUrls: ['./months-form.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MonthsFormComponent implements OnInit {
 
   @Input() months:Month[];
+  @Output() onMonth = new EventEmitter<Month>();
   formMonth:FormGroup;
 
   constructor(
@@ -39,6 +41,11 @@ export class MonthsFormComponent implements OnInit {
         excludeCountDay: new FormControl(0, [Validators.required, Validators.pattern(/^[0-9]*$/)])
       })
     )
+  }
+
+  onSubmit({months}){
+    //console.log(months);
+    this.onMonth.emit(months);
   }
 
 }
