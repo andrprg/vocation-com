@@ -13,12 +13,21 @@
           <td><label class="control-label mt-2">{{item.controls['month'].value | dateToName}}</label></td>
           <td>
             <input type="number" class="form-control" formControlName="summ">
+            <div class="error" *ngIf="item.controls['summ'].invalid && item.controls['summ'].touched">
+                Введено неверное значение
+            </div>
           </td>
           <td>
             <input type="number" class="form-control" formControlName="excludeCountDay">
+            <div class="error" *ngIf="item.controls['excludeCountDay'].invalid && item.controls['excludeCountDay'].touched">
+                Введено неверное значение
+            </div>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+  <button type="submit" class="btn btn-primary float-right mt-2" [disabled]="formMonth.invalid">
+    Далее>>>
+  </button>
 </form>
