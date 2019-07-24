@@ -13,6 +13,7 @@ import { VocationFormComponent } from './Components/vocation-form/vocation-form.
 import { MonthsFormComponent } from './Components/months-form/months-form.component';
 import { DateToNamePipe } from './Pipes/date-to-name.pipe';
 import { ResultFormComponent } from './Components/result-form/result-form.component';
+import { ResultEffect } from './Store/effects/result.effects';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { ResultFormComponent } from './Components/result-form/result-form.compon
     ReactiveFormsModule,
     FormsModule, 
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([MonthEffect]),
+    EffectsModule.forRoot([MonthEffect, ResultEffect]),
   ],
   providers: [],
   bootstrap: [AppComponent]
