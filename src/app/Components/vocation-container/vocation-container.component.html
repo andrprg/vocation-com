@@ -6,7 +6,10 @@
             <app-vocation (onVocation)="onSubmitVocation($event)"></app-vocation>
         </ng-template>
         <ng-template [ngSwitchCase]="'month'">
-            <app-months-form [months]="month" (onVocation)="onSubmitMonth($event)"></app-months-form>
+            <app-months-form [months]="month" (onMonth)="onSubmitMonth($event)"></app-months-form>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'result'">
+            <app-months-form [months]="result" (onResult)="onSubmitResult($event)"></app-months-form>
         </ng-template>
         
       </div>
