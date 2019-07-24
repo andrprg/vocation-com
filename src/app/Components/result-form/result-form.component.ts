@@ -8,8 +8,8 @@ import { Result } from 'src/app/Models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResultFormComponent implements OnInit {
-  @Input() result:Result;
-  @Output() onReset = new EventEmitter();
+  @Input() result: Result;
+  @Output() eventReset = new EventEmitter();
 
   constructor() { }
 
@@ -17,7 +17,7 @@ export class ResultFormComponent implements OnInit {
   }
 
   resetForm(){
-    this.onReset.emit();    
+    this.eventReset.emit();
   }
 
 }

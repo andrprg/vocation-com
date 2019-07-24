@@ -3,18 +3,18 @@
     <div class="col-md-12">
       <div [ngSwitch]="step">
         <ng-template [ngSwitchCase]="'vocation'">
-          <app-vocation (onVocation)="onSubmitVocation($event)"></app-vocation>
+          <app-vocation (eventVocation)="onSubmitVocation($event)"></app-vocation>
         </ng-template>
         <ng-template [ngSwitchCase]="'month'">
           <app-months-form
             [months]="month"
-            (onMonth)="onSubmitMonth($event)"
+            (eventMonth)="onSubmitMonth($event)"
           ></app-months-form>
         </ng-template>
         <ng-template [ngSwitchCase]="'result'">
           <app-result-form
             [result]="result"
-            (onReset)="onSubmitResult($event)"
+            (eventReset)="onSubmitResult($event)"
           ></app-result-form>
         </ng-template>
       </div>

@@ -13,8 +13,8 @@ export class VocationFormComponent implements OnInit, OnDestroy{
 
   formGroup: FormGroup;
   private sub: Subscription;
-  isFromWork:boolean = false;
-  @Output() onVocation = new EventEmitter<Vocation>();
+  isFromWork = false;
+  @Output() eventVocation = new EventEmitter<Vocation>();
 
   constructor(private fb: FormBuilder) { }
 
@@ -34,7 +34,7 @@ export class VocationFormComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
-    if (this.sub) this.sub.unsubscribe;
+    if (this.sub){this.sub.unsubscribe();}
   }
 
   toggleDateFromWorkValidator(){
@@ -42,14 +42,14 @@ export class VocationFormComponent implements OnInit, OnDestroy{
     const dateWork = this.formGroup.get('dateFromWork');
     const dateFromWorkValidators: ValidatorFn[] = [
       Validators.required
-    ];   
+    ];
     if (this.isFromWork) {
       dateWork.setValidators(dateFromWorkValidators);
     } else {
       dateWork.clearValidators();
       dateWork.reset();
     }
-    dateWork.updateValueAndValidity();     
+    dateWork.updateValueAndValidity();
   }
 
   onSubmit({dateFrom,dateFromWork,countDay}) {
@@ -58,7 +58,7 @@ export class VocationFormComponent implements OnInit, OnDestroy{
       countDay,
       this.isFromWork ? new Date(dateFromWork) : null
     )
-    this.onVocation.emit(data);    
-  }  
+    this.eventVocation.emit(data);
+  }
 
 }

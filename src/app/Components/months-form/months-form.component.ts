@@ -11,12 +11,12 @@ import * as moment from 'moment';
 })
 export class MonthsFormComponent implements OnInit {
 
-  @Input() months:Month[];
-  @Output() onMonth = new EventEmitter<Month>();
-  formMonth:FormGroup;
+  @Input() months: Month[];
+  @Output() eventMonth = new EventEmitter<Month>();
+  formMonth: FormGroup;
 
   constructor(
-    private fb:FormBuilder
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -33,8 +33,8 @@ export class MonthsFormComponent implements OnInit {
     });
   }
 
-  private addMonth(month: Date) {    
-    (<FormArray>this.formMonth.get("months")).push(
+  private addMonth(month: Date){
+    (this.formMonth.get('months') as FormArray).push(
       new FormGroup({
         month: new FormControl(month),
         summ: new FormControl(0, [Validators.required, Validators.pattern(/^[0-9]*$/)]),
@@ -44,8 +44,7 @@ export class MonthsFormComponent implements OnInit {
   }
 
   onSubmit({months}){
-    //console.log(months);
-    this.onMonth.emit(months);
+    this.eventMonth.emit(months);
   }
 
 }
