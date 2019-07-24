@@ -10,7 +10,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of formMonth.get('months').controls; index as i" [formGroupName]="i">
-          <td><label class="control-label mt-2">{{getMonthToName(item.controls['month'].value)}}</label></td>
+          <td><label class="control-label mt-2">{{item.controls['month'].value | dateToName}}</label></td>
           <td>
             <input type="number" class="form-control" formControlName="summ">
           </td>
