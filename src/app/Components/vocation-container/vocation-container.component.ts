@@ -19,6 +19,7 @@ export class VocationContainerComponent implements OnInit {
   errorResult$:Observable<string>;
   vocation: Vocation;
   month: Month[];
+  step = 'month';
 
   constructor(
     private store: Store<fromState.AppState>

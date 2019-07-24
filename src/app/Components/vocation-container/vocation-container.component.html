@@ -1,7 +1,15 @@
 <div class="container p-3 vocation-app">
-    <div class="row">
-      <div class="col-md-12">
-        <app-vocation (onVocation)="onSubmitVocation($event)"></app-vocation>
+  <div class="row">
+    <div class="col-md-12">
+      <div [ngSwitch]="step">
+        <ng-template [ngSwitchCase]="'vocation'">
+            <app-vocation (onVocation)="onSubmitVocation($event)"></app-vocation>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'month'">
+            <app-months-form [months]="month" (onVocation)="onSubmitMonth($event)"></app-months-form>
+        </ng-template>
+        
       </div>
     </div>
+  </div>
 </div>
