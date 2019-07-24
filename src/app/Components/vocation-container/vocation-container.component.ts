@@ -19,7 +19,7 @@ export class VocationContainerComponent implements OnInit {
   errorResult$:Observable<string>;
   vocation: Vocation;
   month: Month[];
-  step = 'month';
+  step = 'vocation';
 
   constructor(
     private store: Store<fromState.AppState>
@@ -29,7 +29,11 @@ export class VocationContainerComponent implements OnInit {
     this.errorMonth$ = this.store.pipe(select(fromState.selectMonthLoadFailure));
     this.errorResult$ = this.store.pipe(select(fromState.selectResultLoadFailure));
     this.store.pipe(select(fromState.getMonths))
-      .subscribe(value => this.month = value);
+      .subscribe(value => {
+        this.month = value;
+        if(this.month.length > 0) this.step = 'month';
+      });
+
   }
 
   onSubmitVocation(event){

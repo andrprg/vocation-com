@@ -12,6 +12,7 @@ import { VocationContainerComponent } from './Components/vocation-container/voca
 import { VocationFormComponent } from './Components/vocation-form/vocation-form.component';
 import { MonthsFormComponent } from './Components/months-form/months-form.component';
 import { DateToNamePipe } from './Pipes/date-to-name.pipe';
+import { ResultFormComponent } from './Components/result-form/result-form.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DateToNamePipe } from './Pipes/date-to-name.pipe';
     VocationContainerComponent,
     VocationFormComponent,
     MonthsFormComponent,
-    DateToNamePipe
+    DateToNamePipe,
+    ResultFormComponent
   ],
   imports: [
     BrowserModule,
