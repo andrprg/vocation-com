@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Month } from 'src/app/Models';
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-months-form',
@@ -9,10 +10,33 @@ import { Month } from 'src/app/Models';
 export class MonthsFormComponent implements OnInit {
 
   @Input() months:Month[];
+  formMonth:FormGroup;
 
-  constructor() { }
+  constructor(
+    private fb:FormBuilder
+  ) { }
 
   ngOnInit() {
+    this.initForm();
+  }
+
+  initForm(){
+    this.formMonth = this.fb.group({
+      months: this.fb.array([])
+    });
+    this.months.forEach((value: Month) => {
+      //this.addMonth(value.month);
+    });
+  }
+
+  private addMonth(month: Date) {    
+    (<FormArray>this.formMonth.get("months")).push(
+      new FormGroup({
+        month: new FormControl(month),
+        summ: new FormControl(0, [Validators.required, Validators.pattern(/^[0-9]*$/)]),
+        excludeCountDay: new FormControl(0, [Validators.required, Validators.pattern(/^[0-9]*$/)])
+      })
+    )
   }
 
 }
