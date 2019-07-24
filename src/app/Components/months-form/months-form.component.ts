@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Month } from 'src/app/Models';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-months-form',
@@ -18,6 +19,7 @@ export class MonthsFormComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    moment.locale('ru');
   }
 
   initForm(){
@@ -25,7 +27,7 @@ export class MonthsFormComponent implements OnInit {
       months: this.fb.array([])
     });
     this.months.forEach((value: Month) => {
-      //this.addMonth(value.month);
+      this.addMonth(value.month);
     });
   }
 
