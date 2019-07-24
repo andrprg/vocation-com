@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/Store';
-import { Month, Result } from 'src/app/Models';
+import { Store, select } from '@ngrx/store';
+
+import * as fromState from 'src/app/Store';
+import { Month, Result, Vocation } from 'src/app/Models';
+import * as fromMonthActions from '../../Store/actions/month.action';
 
 
 @Component({
@@ -12,18 +14,26 @@ import { Month, Result } from 'src/app/Models';
 })
 export class VocationContainerComponent implements OnInit {
 
-  month$:  Observable<Month[]>;
   result$: Observable<Result>;
+  errorMonth$:Observable<string>;
+  errorResult$:Observable<string>;
+  vocation: Vocation;
+  month: Month[];
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<fromState.AppState>
   ) { }
 
   ngOnInit() {
+    this.errorMonth$ = this.store.pipe(select(fromState.selectMonthLoadFailure));
+    this.errorResult$ = this.store.pipe(select(fromState.selectResultLoadFailure));
+    this.store.pipe(select(fromState.getMonths))
+      .subscribe(value => this.month = value);
   }
 
   onSubmitVocation(event){
-    console.log(event);
+    this.vocation = event;
+    this.store.dispatch(new fromMonthActions.LoadMonths(this.vocation));
   }
 
 }
