@@ -1,13 +1,17 @@
 <div class="row">
-    <div class="col-md-10">Среднедневной заработок</div>
-    <div class="col-md-2">{{result.averageSummDay}}</div>
+  <div class="col-md-10">Среднедневной заработок</div>
+  <div class="col-md-2">{{ result.averageSummDay }}</div>
 </div>
 
 <div class="row">
-    <div class="col-md-10">Отпускные</div>
-    <div class="col-md-2">{{result.vocatioSumm}}</div>
+  <div class="col-md-10">Отпускные</div>
+  <div class="col-md-2">{{ result.vocatioSumm }}</div>
 </div>
-<hr>
-<button type="button" class="btn btn-primary float-right mt-2" (click)="resetForm()">
-    Новый расчет
+<hr />
+<button
+  type="button"
+  class="btn btn-primary float-right mt-2"
+  (click)="resetForm()"
+>
+  Новый расчет
 </button>
