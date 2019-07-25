@@ -50,3 +50,11 @@ export const getIsLoading = createSelector(
         return st1.loading || st2.loading;
     }
 );
+
+export const getError = createSelector(
+    getResultState,
+    getMonthState,
+    (st1: ResultState, st2: MonthState) => {
+        return st1.error || st2.error;
+    }
+);
