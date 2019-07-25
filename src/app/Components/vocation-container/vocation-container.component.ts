@@ -24,19 +24,15 @@ export class VocationContainerComponent implements OnInit {
   constructor(private store: Store<fromState.AppState>) {}
 
   ngOnInit() {
-    this.store.pipe(
-      select(fromState.selectMonthLoadFailure)
-    )
-    .subscribe(value => {
-      console.log('Error: ', this.error);
-      this.error = value;
-    });
-
     this.store
-      .pipe(select(fromState.getIsLoading))
+      .pipe(select(fromState.selectMonthLoadFailure))
       .subscribe(value => {
-        this.loading = value;
+        this.error = value;
       });
+
+    this.store.pipe(select(fromState.getIsLoading)).subscribe(value => {
+      this.loading = value;
+    });
 
     this.store.pipe(select(fromState.getMonths)).subscribe(value => {
       this.month = value;
