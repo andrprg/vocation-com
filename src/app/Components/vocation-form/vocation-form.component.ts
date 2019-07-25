@@ -1,28 +1,40 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy   } from '@angular/core';
-import { Vocation } from 'src/app/Models';
-import { FormGroup, FormBuilder, FormControl, Validators, ValidatorFn } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy
+} from "@angular/core";
+import { Vocation } from "src/app/Models";
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  Validators,
+  ValidatorFn
+} from "@angular/forms";
+import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-vocation',
-  templateUrl: './vocation-form.component.html',
-  styleUrls: ['./vocation-form.component.css'],
+  selector: "app-vocation",
+  templateUrl: "./vocation-form.component.html",
+  styleUrls: ["./vocation-form.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VocationFormComponent implements OnInit, OnDestroy{
-
+export class VocationFormComponent implements OnInit, OnDestroy {
   formGroup: FormGroup;
   private sub: Subscription;
   isFromWork = false;
   @Output() eventVocation = new EventEmitter<Vocation>();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.initForm();
   }
 
-  initForm(){
+  initForm() {
     this.formGroup = this.fb.group({
       dateFrom: new FormControl(null, [Validators.required]),
       dateFromWork: new FormControl(null),
@@ -34,15 +46,15 @@ export class VocationFormComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
-    if (this.sub){this.sub.unsubscribe();}
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 
-  toggleDateFromWorkValidator(){
+  toggleDateFromWorkValidator() {
     this.isFromWork = !this.isFromWork;
-    const dateWork = this.formGroup.get('dateFromWork');
-    const dateFromWorkValidators: ValidatorFn[] = [
-      Validators.required
-    ];
+    const dateWork = this.formGroup.get("dateFromWork");
+    const dateFromWorkValidators: ValidatorFn[] = [Validators.required];
     if (this.isFromWork) {
       dateWork.setValidators(dateFromWorkValidators);
     } else {
@@ -52,13 +64,12 @@ export class VocationFormComponent implements OnInit, OnDestroy{
     dateWork.updateValueAndValidity();
   }
 
-  onSubmit({dateFrom,dateFromWork,countDay}) {
+  onSubmit({ dateFrom, dateFromWork, countDay }) {
     const data = new Vocation(
       new Date(dateFrom),
       countDay,
       this.isFromWork ? new Date(dateFromWork) : null
-    )
+    );
     this.eventVocation.emit(data);
   }
-
 }

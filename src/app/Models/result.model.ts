@@ -1,8 +1,3 @@
 export default class Result {
-    constructor(
-        public averageSummDay: number,
-        public vocatioSumm: number
-    ) {
-    }
-
+  constructor(public averageSummDay: number, public vocatioSumm: number) {}
 }

@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { Result } from 'src/app/Models';
 
 @Component({
@@ -11,13 +18,11 @@ export class ResultFormComponent implements OnInit {
   @Input() result: Result;
   @Output() eventReset = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  resetForm(){
+  resetForm() {
     this.eventReset.emit();
   }
-
 }

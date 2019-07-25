@@ -1,6 +1,19 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import { Month } from 'src/app/Models';
-import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormArray,
+  FormControl,
+  Validators
+} from '@angular/forms';
 import * as moment from 'moment';
 
 @Component({
@@ -10,21 +23,18 @@ import * as moment from 'moment';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MonthsFormComponent implements OnInit {
-
   @Input() months: Month[];
   @Output() eventMonth = new EventEmitter<Month>();
   formMonth: FormGroup;
 
-  constructor(
-    private fb: FormBuilder
-  ) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.initForm();
     moment.locale('ru');
   }
 
-  initForm(){
+  initForm() {
     this.formMonth = this.fb.group({
       months: this.fb.array([])
     });
@@ -33,18 +43,23 @@ export class MonthsFormComponent implements OnInit {
     });
   }
 
-  private addMonth(month: Date){
+  private addMonth(month: Date) {
     (this.formMonth.get('months') as FormArray).push(
       new FormGroup({
         month: new FormControl(month),
-        summ: new FormControl(0, [Validators.required, Validators.pattern(/^[0-9]*$/)]),
-        excludeCountDay: new FormControl(0, [Validators.required, Validators.pattern(/^[0-9]*$/)])
+        summ: new FormControl(0, [
+          Validators.required,
+          Validators.pattern(/^[0-9]*$/)
+        ]),
+        excludeCountDay: new FormControl(0, [
+          Validators.required,
+          Validators.pattern(/^[0-9]*$/)
+        ])
       })
-    )
+    );
   }
 
-  onSubmit({months}){
+  onSubmit({ months }) {
     this.eventMonth.emit(months);
   }
-
 }
