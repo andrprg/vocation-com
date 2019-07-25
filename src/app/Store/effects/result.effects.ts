@@ -5,7 +5,6 @@ import { map, switchMap, catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { VocationService } from 'src/app/Services/vocation.service';
 import * as fromActions from '../actions/result.action';
-import { Vocation, Month } from 'src/app/Models';
 
 @Injectable()
 export class ResultEffect {
