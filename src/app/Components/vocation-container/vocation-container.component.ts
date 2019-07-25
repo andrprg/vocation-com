@@ -6,6 +6,7 @@ import * as fromState from 'src/app/Store';
 import { Month, Result, Vocation } from 'src/app/Models';
 import * as fromMonthActions from '../../Store/actions/month.action';
 import * as fromResultActions from '../../Store/actions/result.action';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-vocation-container',
@@ -16,6 +17,7 @@ export class VocationContainerComponent implements OnInit {
   result$: Observable<Result>;
   errorMonth$: Observable<string>;
   errorResult$: Observable<string>;
+  loading: boolean;
   vocation: Vocation;
   month: Month[];
   result: Result;
@@ -30,9 +32,18 @@ export class VocationContainerComponent implements OnInit {
     this.errorResult$ = this.store.pipe(
       select(fromState.selectResultLoadFailure)
     );
+    this.store
+      .pipe(select(fromState.getIsLoading))
+      .subscribe(value => {
+        console.log('loading: ', value);
+        this.loading = value;
+      });
+
     this.store.pipe(select(fromState.getMonths)).subscribe(value => {
       this.month = value;
-      if (this.month.length > 0){ this.step = 'month'};
+      if (this.month.length > 0) {
+        this.step = 'month';
+      }
     });
     this.store.pipe(select(fromState.getResult)).subscribe(value => {
       this.result = value;
