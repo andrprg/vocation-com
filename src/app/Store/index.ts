@@ -8,7 +8,7 @@ import * as ResultReducer from './reducers/result.reducer';
 
 export interface AppState {
     monthState: MonthState;
-    resultState: ResultState
+    resultState: ResultState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -19,7 +19,7 @@ export const reducers: ActionReducerMap<AppState> = {
 export const getMonthState = createFeatureSelector<MonthState>('monthState');
 export const getMonths = createSelector(
     getMonthState,
-    (state:MonthState) => state.month
+    (state: MonthState) => state.month
 );
 
 export const selectMonthLoadFailure = createSelector(
@@ -33,12 +33,20 @@ export const selectMonthLoadFailure = createSelector(
 export const getResultState = createFeatureSelector<ResultState>('resultState');
 export const getResult = createSelector(
     getResultState,
-    (state:ResultState) => state.result
+    (state: ResultState) => state.result
 );
 
 export const selectResultLoadFailure = createSelector(
     getResultState,
     (state: ResultState) => {
         return state.error;
+    }
+);
+
+export const getIsLoading = createSelector(
+    getResultState,
+    getMonthState,
+    (st1: ResultState, st2: MonthState) => {
+        return st1.loading || st2.loading;
     }
 );
