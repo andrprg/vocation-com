@@ -23,7 +23,7 @@ import * as moment from 'moment';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MonthsFormComponent implements OnInit {
-  @Input() months: Month[];
+  @Input() months: Month[] = [];
   @Output() eventMonth = new EventEmitter<Month>();
   formMonth: FormGroup;
 

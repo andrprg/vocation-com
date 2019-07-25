@@ -15,7 +15,7 @@ import { Result } from 'src/app/Models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResultFormComponent implements OnInit {
-  @Input() result: Result;
+  @Input() result: Result = new Result(0, 0);
   @Output() eventReset = new EventEmitter();
 
   constructor() {}
