@@ -44,6 +44,7 @@ export class MonthsFormComponent implements OnInit {
   }
 
   private addMonth(month: Date) {
+    const days = moment(month).daysInMonth();
     (this.formMonth.get('months') as FormArray).push(
       new FormGroup({
         month: new FormControl(month),
@@ -53,7 +54,7 @@ export class MonthsFormComponent implements OnInit {
         ]),
         excludeCountDay: new FormControl(0, [
           Validators.required,
-          Validators.pattern(/^[0-9]*$/)
+          Validators.max(days)
         ])
       })
     );
