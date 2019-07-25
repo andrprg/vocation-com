@@ -42,7 +42,7 @@ describe('VocationFormComponent', () => {
     fixture.detectChanges();
 
     component.isFromWork = true;
-    component.onVocation.subscribe(({dateFrom:dt1,dateFromWork:dt2,countDay: days}) => {
+    component.eventVocation.subscribe(({dateFrom:dt1,dateFromWork:dt2,countDay: days}) => {
       expect(dt1).toEqual(new Date(dateFrom));
       expect(dt2).toEqual(new Date(dateFromWork));
       expect(days).toEqual(countDay);
