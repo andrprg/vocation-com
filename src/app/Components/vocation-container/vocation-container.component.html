@@ -1,9 +1,11 @@
 <div class="container p-3 vocation-app">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" *ngIf="!loading">
       <div [ngSwitch]="step">
         <ng-template [ngSwitchCase]="'vocation'">
-          <app-vocation (eventVocation)="onSubmitVocation($event)"></app-vocation>
+          <app-vocation
+            (eventVocation)="onSubmitVocation($event)"
+          ></app-vocation>
         </ng-template>
         <ng-template [ngSwitchCase]="'month'">
           <app-months-form
@@ -18,6 +20,9 @@
           ></app-result-form>
         </ng-template>
       </div>
+    </div>
+    <div *ngIf="loading" class="col-md-12 d-flex justify-content-center">
+      <h4>Loading...</h4>
     </div>
   </div>
 </div>
