@@ -14,9 +14,7 @@ import { delay } from 'rxjs/operators';
   styleUrls: ['./vocation-container.component.css']
 })
 export class VocationContainerComponent implements OnInit {
-  result$: Observable<Result>;
-  errorMonth$: Observable<string>;
-  errorResult$: Observable<string>;
+  error = null;
   loading: boolean;
   vocation: Vocation;
   month: Month[];
@@ -26,16 +24,17 @@ export class VocationContainerComponent implements OnInit {
   constructor(private store: Store<fromState.AppState>) {}
 
   ngOnInit() {
-    this.errorMonth$ = this.store.pipe(
+    this.store.pipe(
       select(fromState.selectMonthLoadFailure)
-    );
-    this.errorResult$ = this.store.pipe(
-      select(fromState.selectResultLoadFailure)
-    );
+    )
+    .subscribe(value => {
+      console.log('Error: ', this.error);
+      this.error = value;
+    });
+
     this.store
       .pipe(select(fromState.getIsLoading))
       .subscribe(value => {
-        console.log('loading: ', value);
         this.loading = value;
       });
 
@@ -67,5 +66,6 @@ export class VocationContainerComponent implements OnInit {
     this.step = 'vocation';
     this.vocation = null;
     this.month = [];
+    this.error = null;
   }
 }
