@@ -1,6 +1,6 @@
 <div class="container p-3 vocation-app">
   <div class="row">
-    <div class="col-md-12" *ngIf="!loading">
+    <div class="col-md-12" *ngIf="!loading && !error">
       <div [ngSwitch]="step">
         <ng-template [ngSwitchCase]="'vocation'">
           <app-vocation
@@ -23,6 +23,22 @@
     </div>
     <div *ngIf="loading" class="col-md-12 d-flex justify-content-center">
       <h4>Loading...</h4>
+    </div>
+    <div *ngIf="error" class="row">
+      <div class="col-md-12  d-flex justify-content-center">
+        <h4 style="color: red">Error: {{ error }}</h4>
+      </div>
+      <hr />
+      <div class="col-md-12">
+        <hr />
+        <button
+          type="button"
+          class="btn btn-primary float-right mr-2"
+          (click)="onSubmitResult()"
+        >
+          Вернуться
+        </button>
+      </div>
     </div>
   </div>
 </div>
