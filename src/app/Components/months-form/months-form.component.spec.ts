@@ -23,7 +23,6 @@ describe('MonthsFormComponent', () => {
     fixture = TestBed.createComponent(MonthsFormComponent);
     component = fixture.componentInstance;
     element = fixture.nativeElement;
-    fixture.detectChanges();
   });
 
   beforeEach(() => {
@@ -35,7 +34,7 @@ describe('MonthsFormComponent', () => {
       new Month(new Date(2019, 5), 173, 3)
     ];
 
-    vocation = new Vocation(new Date(2019,7, 1),28);
+    vocation = new Vocation(new Date(2019, 7, 1), 28);
 
   });
 
@@ -47,7 +46,6 @@ describe('MonthsFormComponent', () => {
     component.months = months;
     fixture.detectChanges();
     const cnt = element.querySelectorAll('input').length;
-    console.log(element.querySelectorAll('tr'));
-    expect(cnt).toEqual(5);
+    expect(cnt).toEqual(10); 
   });
 });
