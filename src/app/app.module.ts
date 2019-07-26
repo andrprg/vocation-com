@@ -14,6 +14,7 @@ import { MonthsFormComponent } from './Components/months-form/months-form.compon
 import { DateToNamePipe } from './Pipes/date-to-name.pipe';
 import { ResultFormComponent } from './Components/result-form/result-form.component';
 import { ResultEffect } from './Store/effects/result.effects';
+import { HeaderComponent } from './Components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ResultEffect } from './Store/effects/result.effects';
     VocationFormComponent,
     MonthsFormComponent,
     DateToNamePipe,
-    ResultFormComponent
+    ResultFormComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
